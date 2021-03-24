@@ -6,16 +6,17 @@ resources:
   ubuntu:
     type: Cloud.vSphere.Machine
     properties:
-      image: Ubuntu18
-      flavor: tiny
+      image: ubuntu
+      flavor: Small
       constraints:
-        - tag: 'cloud:vsphere'
+        - tag: 'env:vsphere'
       networks:
-        - network: '${resource.vsphere_network.id}'
+        - network: '${resource.network_1.id}'
           assignment: static
-  vsphere_network:
+  network_1:
     type: Cloud.vSphere.Network
     properties:
       networkType: existing
       constraints:
-        - tag: 'net:vsphere'
+        - tag: 'net:existing'
+        - tag: '!network-type:deadnet'
