@@ -13,6 +13,10 @@ resources:
       networks:
         - network: '${resource.network_1.id}'
           assignment: static
+          deviceIndex: 0
+        - network: '${resource.netowrk_2.id}'
+          assignment: static
+          deviceIndex: 1
   network_1:
     type: Cloud.vSphere.Network
     properties:
@@ -20,3 +24,10 @@ resources:
       constraints:
         - tag: 'net:existing'
         - tag: '!network-type:deadnet'
+  network_2:
+    type: Cloud.vSphere.Network
+    properties:
+      networkType: existing
+      constraints:
+        - tag: 'net:existing'
+        - tag: 'network-type:deadnet'
