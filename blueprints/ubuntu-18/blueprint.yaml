@@ -14,7 +14,7 @@ resources:
         - network: '${resource.network_1.id}'
           assignment: static
           deviceIndex: 0
-        - network: '${resource.netowrk_2.id}'
+        - network: '${resource.network_2.id}'
           assignment: static
           deviceIndex: 1
   network_1:
