@@ -1,7 +1,10 @@
 formatVersion: 1
 name: Ubuntu 18
 version: 1.0.3
-inputs: {}
+inputs:
+  AddSecondNetwork:
+    type: boolean
+    default: false
 resources:
   ubuntu:
     type: Cloud.vSphere.Machine
@@ -22,7 +25,7 @@ resources:
   network_2:
     type: Cloud.vSphere.Network
     properties:
-      count: 1
+      count: '${input.AddSecondNetwork? 1:0}'
       networkType: existing
       constraints:
         - tag: 'net:existing'
