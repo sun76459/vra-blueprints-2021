@@ -10,7 +10,7 @@ resources:
       flavor: Small
       constraints:
         - tag: 'env:vsphere'
-      networks: '${map_by(resource.network_1[*] + resource.network_2[*],nic => {"network":nic.id, "assignment":"static", "deviceIndex":nic.deviceIndex, "assignIPv6Address:false})}'
+      networks: '${map_by(resource.network_1[*] + resource.network_2[*],nic => {"network":nic.id, "assignment":"static", "deviceIndex":nic.deviceIndex, "assignIPv6Address":false})}'
   network_1:
     type: Cloud.vSphere.Network
     properties:
