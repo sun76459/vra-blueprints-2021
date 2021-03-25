@@ -1,0 +1,33 @@
+formatVersion: 1
+name: Simple Ubuntu 18
+version: 1.0.0
+inputs: {}
+resources:
+  ubuntu:
+    type: Cloud.vSphere.Machine
+    properties:
+      image: ubuntu
+      flavor: Small
+      constraints:
+        - tag: 'env:vsphere'
+      networks:
+        - network: '${resource.network_1.id}'
+          assignment: static
+          deviceIndex: 0
+        - network: '${resource.network_2.id}'
+          assignment: static
+          deviceIndex: 1
+  network_1:
+    type: Cloud.vSphere.Network
+    properties:
+      networkType: existing
+      constraints:
+        - tag: 'net:existing'
+        - tag: '!network-type:deadnet'
+  network_2:
+    type: Cloud.vSphere.Network
+    properties:
+      networkType: existing
+      constraints:
+        - tag: 'net:existing'
+        - tag: 'network-type:deadnet'
