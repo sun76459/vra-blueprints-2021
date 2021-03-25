@@ -1,6 +1,6 @@
 formatVersion: 1
 name: Ubuntu 18
-version: 1.0.0
+version: 1.0.1
 inputs: {}
 resources:
   ubuntu:
@@ -10,16 +10,11 @@ resources:
       flavor: Small
       constraints:
         - tag: 'env:vsphere'
-      networks:
-        - network: '${resource.network_1.id}'
-          assignment: static
-          deviceIndex: 0
-        - network: '${resource.network_2.id}'
-          assignment: static
-          deviceIndex: 1
+      networks: '${map_by(resource.network_1[*] + resource.network_2[*],nic => {"network":nic.id, "assignment":"static", "deviceIndex":nic.deviceIndex})}'
   network_1:
     type: Cloud.vSphere.Network
     properties:
+      count: 1
       networkType: existing
       constraints:
         - tag: 'net:existing'
@@ -27,6 +22,7 @@ resources:
   network_2:
     type: Cloud.vSphere.Network
     properties:
+      count: 1
       networkType: existing
       constraints:
         - tag: 'net:existing'
