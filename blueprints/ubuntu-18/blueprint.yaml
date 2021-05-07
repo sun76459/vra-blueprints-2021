@@ -6,6 +6,10 @@ inputs:
     title: Use Dead Net?
     type: boolean
     default: false
+  public_network_name:
+    type: string
+  deadnet_name:
+    type: string
 resources:
   ubuntu:
     type: Cloud.vSphere.Machine
@@ -24,6 +28,7 @@ resources:
       constraints:
         - tag: 'net:existing'
         - tag: '!network-type:deadnet'
+        - tag: '${input.UseDeadnet? "network-name:"+input.public_network_name: ""}'
   network_2:
     type: Cloud.vSphere.Network
     properties:
@@ -32,3 +37,4 @@ resources:
       constraints:
         - tag: 'net:existing'
         - tag: 'network-type:deadnet'
+        - tag: 'network-name: ${input.deadnet_name}'
